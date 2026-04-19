@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Documents validés - Camergo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body style="font-family: 'Inter', Arial, Helvetica, sans-serif; background-color: #f4f4f4; padding: 20px; margin: 0;">
+    <div style="max-width: 600px; margin: auto; background-color: #ffffff; border-radius: 8px; padding: 30px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        <!-- En-tête avec logo/texte Camergo -->
+        <h2 style="color: #37B361; font-family: 'Inter', Arial, Helvetica, sans-serif; font-weight: 600; margin-top: 0;">Camergo</h2>
+        
+        <!-- Titre principal -->
+        <p style="font-size: 18px; color: #333; font-family: 'Inter', Arial, Helvetica, sans-serif; font-weight: 600;">Documents validés avec succès</p>
+        
+        <!-- Message de félicitations / information -->
+        <p style="font-size: 16px; color: #555; font-family: 'Inter', Arial, Helvetica, sans-serif;">
+            Bonjour <span th:text="${userName}" style="font-weight: 600;">Jean Dupont</span>,
+        </p>
+        <p style="font-size: 16px; color: #555; font-family: 'Inter', Arial, Helvetica, sans-serif;">
+            Nous avons le plaisir de vous informer que vos documents ont été vérifiés et validés par notre équipe.
+        </p>
+        
+        <!-- Détails éventuels (liste des documents, dates) -->
+        <div style="background-color: #f9f9f9; border-left: 4px solid #37B361; padding: 15px; margin: 20px 0;">
+            <p style="margin: 0 0 5px 0; font-weight: 600; color: #333;">Documents validés :</p>
+            <ul style="margin: 0; padding-left: 20px; color: #555;">
+                <li th:each="doc : ${documents}" th:text="${doc}">Pièce d'identité</li>
+                <!-- Exemple statique si la liste n'est pas fournie -->
+                <li>Permis de conduire</li>
+                <li>Certificat de résidence</li>
+            </ul>
+            <p style="margin: 10px 0 0 0; color: #777;">Date de validation : <span th:text="${validationDate}">15 mars 2026</span></p>
+        </div>
+        
+        <p style="font-size: 16px; color: #555; font-family: 'Inter', Arial, Helvetica, sans-serif;">
+            Vous pouvez dès à présent profiter de tous les services Camergo (VTC, livraison, covoiturage, épicerie...).
+        </p>
+        
+        <!-- Lien vers l'application / tableau de bord (optionnel) -->
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="https://www.camergo.com/dashboard" style="background-color: #37B361; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: 600; display: inline-block;">Accéder à mon compte</a>
+        </div>
+        
+        <!-- Support WhatsApp -->
+        <p style="font-size: 14px; color: #777; font-family: 'Inter', Arial, Helvetica, sans-serif; border-top: 1px solid #eee; padding-top: 20px;">
+            Une question ? Contactez notre support sur 
+            <a href="https://wa.me/237691951267" style="color: #37B361; text-decoration: none;" target="_blank">WhatsApp</a>.
+        </p>
+        
+        <!-- Signature -->
+        <p style="font-size: 14px; color: #777; font-family: 'Inter', Arial, Helvetica, sans-serif;">– L'équipe Camergo</p>
+    </div>
+</body>
+</html>

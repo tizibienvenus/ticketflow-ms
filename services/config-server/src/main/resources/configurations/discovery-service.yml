@@ -1,0 +1,23 @@
+#spring:
+#  application:
+#    name: discovery-service
+#  cloud:
+#    config:
+#      uri: http://localhost:8888
+#      fail-fast: true
+#      retry:
+#        max-attempts: 20
+#        initial-interval: 2000
+
+# Surcharge pour désactiver l'enregistrement (le serveur Eureka ne s'enregistre pas lui-même)
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+  server:
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 60000
+server:
+  port: 8761
+  #servlet:
+  #  context-path: /

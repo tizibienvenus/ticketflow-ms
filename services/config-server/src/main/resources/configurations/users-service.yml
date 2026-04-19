@@ -1,0 +1,96 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/camergo
+    username: admin
+    password: 1234
+    driver-class-name: org.postgresql.Driver
+
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      idle-timeout: 30000
+      connection-timeout: 20000
+
+  jpa:
+    open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        transaction: jta.platform.org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform
+    #database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update #create-drop
+    show-sql: true
+
+  flyway:
+    enabled: false
+    locations: classpath:db/migration
+    url: ${spring.datasource.url}
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+    baseline-on-migrate: true
+    baseline-version: 0
+    validate-on-migrate: false
+  
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${KEYCLOAK_ISSUER_URI:https://keycloak.4dealx.com/realms/camergo}
+          jwk-set-uri: ${KEYCLOAK_JWK_SET_URI:https://keycloak.4dealx.com/realms/camergo/protocol/openid-connect/certs}
+
+  kafka:
+    bootstrap-servers: localhost:9092  # À adapter selon votre environnement
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring.json.type.mapping: # facultatif si on utilise ADD_TYPE_INFO_HEADERS=false
+
+keycloak:
+  auth-server-url: ${KEYCLOAK_AUTH_SERVER_URL:https://keycloak.4dealx.com}
+  realm: ${KEYCLOAK_REALM:camergo}
+  admin:
+    username: ${KEYCLOAK_ADMIN_USERNAME:camergo}
+    password: ${KEYCLOAK_ADMIN_PASSWORD:NMtEJfvffe7wjdn}
+  client-id: camergo-identity-service
+  client-secret: ${KEYCLOAK_CLIENT_SECRET:LiDz3TeP5Xb2vJdwYuCQfnG7Rdubs0Dy}
+  token-uri: ${keycloak.auth-server-url}/realms/${keycloak.realm}/protocol/openid-connect/token
+
+webauthn:
+  relying-party:
+    id: localhost
+    name: camergo
+  origin: http://localhost:8080
+
+camergo:
+  security:
+    enabled: true
+    disable-auto-security: false
+    issuer: ${KEYCLOAK_ISSUER_URI:https://keycloak.4dealx.com/realms/master}
+    jwkSetUri: ${KEYCLOAK_JWK_SET_URI:https://keycloak.4dealx.com/realms/master/protocol/openid-connect/certs}
+
+swagger:
+    enabled: true
+springdoc:
+  api-docs:
+    enabled: true
+    path: /api/v3/api-docs
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always

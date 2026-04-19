@@ -1,0 +1,111 @@
+server:
+  port: 8080
+ 
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      # Configuration CORS
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowed-origins: "http://localhost:3000,http://localhost:4200"
+            allowed-methods: "GET,POST,PUT,PATCH,DELETE,OPTIONS"
+            allowed-headers: "*"
+            allow-credentials: true
+            max-age: 3600
+
+      default-filters:
+        - name: RequestRateLimiter
+          args:
+            key-resolver: "#{@hybridKeyResolver}"
+            redis-rate-limiter.replenishRate: 10
+            redis-rate-limiter.burstCapacity: 20
+        - TokenRelay=   # Propage automatiquement le token JWT aux services aval
+
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+
+      routes:
+        - id: auth-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/api/v1/auth/**
+
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/api/users/**, /api/roles/**, /api/permissions/**
+
+        - id: document-service
+          uri: lb://DOCUMENT-SERVICE
+          predicates:
+            - Path=/api/v1/documents/**
+        
+        - id: notification-service
+          uri: lb://NOTIFICATION-SERVICE
+          predicates:
+            - Path=/api/v1/notifications/**
+
+        - id: ticket-service
+          uri: lb://TICKET-SERVICE
+          predicates:
+            - Path=/api/tickets/**
+
+        # Agrégation des API docs
+        - id: openapi-aggregator
+          uri: http://localhost:${server.port}
+          predicates:
+            - Path=/v3/api-docs/**
+          filters:
+            - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs
+
+        # Agrégation de Actuator
+        - id: actuator-aggregator
+          uri: http://localhost:${server.port}
+          predicates:
+            - Path=/actuator/**
+          filters:
+            - RewritePath=/actuator/(?<service>[^/]+)(?<remaining>/?.*), /${service}/actuator${remaining}
+        
+        # Agrégation des métriques Prometheus  
+        - id: prometheus-aggregator
+          uri: http://localhost:${server.port}
+          predicates:
+            - Path=/prometheus/**
+          filters:
+            - RewritePath=/prometheus/(?<service>.*), /${service}/actuator/prometheus
+
+        - id: documentation-aggregator
+          uri: lb://documentation-aggregator
+          predicates:
+            - Path=/documentation/**
+
+            #- StripPrefix=2
+
+
+springdoc:
+  swagger-ui:
+    urls:
+      - name: identity-service
+        url: /v3/api-docs/identity-service
+      - name: ticket-service
+        url: /v3/api-docs/ticket-service
+      - name: notification-service
+        url: /v3/api-docs/notification-service
+      - name: document-service
+        url: /v3/api-docs/document-service
+    path: /swagger-ui.html
+  api-docs:
+    enabled: true
+
+logging:
+  level:
+    org.springframework.cloud.gateway: TRACE
+    org.springframework.http.server.reactive: DEBUG
+    org.springframework.web.reactive: DEBUG
+    reactor.netty: DEBUG
+    org.springframework.boot.autoconfigure.web: DEBUG

@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.3.5</version>
+		<relativePath/>
+	</parent>
+    
+    <groupId>com.boaz.ticketflow</groupId>
+    <artifactId>ticketflow-microservices</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+
+    <name>TicketFlow Microservices Parent</name>
+
+    <properties>
+        <java.version>21</java.version>
+        <spring-boot.version>3.3.11</spring-boot.version>
+        <spring-cloud.version>2023.0.5</spring-cloud.version> <!-- ou version adaptée -->
+        <spring-framework.version>6.1.21</spring-framework.version>
+        <netty.version>4.1.132.Final</netty.version>
+        <xstream.version>1.4.21</xstream.version>
+        <spring-security.version>6.3.8</spring-security.version>
+        <tomcat.version>10.1.53</tomcat.version>
+        <lz4.version>1.8.1</lz4.version>
+        <postgresql.version>42.7.7</postgresql.version>
+        <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
+        <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
+        <resilience4j.version>2.0.2</resilience4j.version>
+        <restclient.version>2.0.0</restclient.version>
+        <!-- <kafka.version>3.0.0</kafka.version> -->
+        <lombok.version>1.18.42</lombok.version>
+        <flyway.version>10.10.0</flyway.version>
+        <junit-jupiter.version>5.10.0</junit-jupiter.version>
+        <h3.version>4.4.0</h3.version>
+        <mapstruct.version>1.5.5.Final</mapstruct.version>
+        <springdoc.version>2.6.0</springdoc.version>
+    <kotlin.version>2.3.10</kotlin.version>
+    </properties>
+
+    <modules>
+        <module>config-server</module>
+        <module>discovery-service</module>
+        <module>common</module>
+        <module>api-gateway</module>
+        <module>demo-service</module>
+        <module>documentations-aggregator</module>
+        <module>identity-service</module>
+        <module>notification-service</module>
+        <module>document-service</module>
+        <module>dispatch-service</module>
+        <module>meta-service</module>
+     <!--  
+ <module>dispatch-service</module>
+        <module>users-service</module>
+        <module>ride-service</module>
+        <module>pricing-service</module> 
+-->
+    </modules>
+
+    <dependencyManagement>
+		<dependencies>
+
+            <!-- Spring Boot BOM -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+
+            <!-- Spring Cloud BOM -->
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-bom</artifactId>
+                <version>${netty.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.thoughtworks.xstream</groupId>
+                <artifactId>xstream</artifactId>
+                <version>${xstream.version}</version>
+            </dependency>
+ 
+		</dependencies>
+	</dependencyManagement>
+
+    <build>
+        <resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*.properties</include>
+					<include>**/*.yml</include>
+					<include>**/*.yaml</include>
+				</includes>
+				<filtering>true</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>false</filtering>
+				<includes>
+					<include>**/*.html</include>
+					<include>**/*.pem</include>
+					<include>**/*.txt</include>
+					<include>**/*.md</include>
+					<include>**/*.css</include>
+					<include>**/*.js</include>
+					<include>**/*.png</include>
+					<include>**/*.jpg</include>
+                    <include>**/*.json</include>
+				</includes>
+			</resource>
+		</resources> 
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring-boot.version}</version>
+                    <executions>
+                        <execution>
+                            <id>repackage</id>
+                            <goals>
+                                <goal>repackage</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.sonarsource.scanner.maven</groupId>
+                    <artifactId>sonar-maven-plugin</artifactId>
+                    <version>5.5.0.6356</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin.version}</version>
+                    <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                        <compilerArgs>
+                            <arg>-parameters</arg>
+                        </compilerArgs>
+                        <annotationProcessorPaths>
+                            <path>
+                                <groupId>org.projectlombok</groupId>
+                                <artifactId>lombok</artifactId>
+                                <version>1.18.42</version>
+                            </path>
+                            <path>
+                                <groupId>org.projectlombok</groupId>
+                                <artifactId>lombok-mapstruct-binding</artifactId>
+                                <version>0.2.0</version>
+                            </path>
+                            <!-- Add MapStruct processor -->
+                            <path>
+                                <groupId>org.mapstruct</groupId>
+                                <artifactId>mapstruct-processor</artifactId>
+                                <version>${mapstruct.version}</version>
+                            </path>
+                        </annotationProcessorPaths>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${maven-surefire-plugin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+</project>

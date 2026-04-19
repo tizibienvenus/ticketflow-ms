@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Documents non validés - Camergo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body style="font-family: 'Inter', Arial, Helvetica, sans-serif; background-color: #f4f4f4; padding: 20px; margin: 0;">
+    <div style="max-width: 600px; margin: auto; background-color: #ffffff; border-radius: 8px; padding: 30px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        <!-- En-tête -->
+        <h2 style="color: #37B361; font-family: 'Inter', Arial, Helvetica, sans-serif; font-weight: 600; margin-top: 0;">Camergo</h2>
+        
+        <!-- Titre principal avec icône ou couleur d'alerte -->
+        <p style="font-size: 18px; color: #d9534f; font-family: 'Inter', Arial, Helvetica, sans-serif; font-weight: 600;">Documents non validés</p>
+        
+        <!-- Message personnalisé -->
+        <p style="font-size: 16px; color: #555; font-family: 'Inter', Arial, Helvetica, sans-serif;">
+            Bonjour <span th:text="${userName}" style="font-weight: 600;">Jean Dupont</span>,
+        </p>
+        <p style="font-size: 16px; color: #555; font-family: 'Inter', Arial, Helvetica, sans-serif;">
+            Nous avons examiné les documents que vous avez fournis, mais malheureusement ils n'ont pas pu être validés pour la raison suivante :
+        </p>
+        
+        <!-- Encart avec la raison -->
+        <div style="background-color: #fcf2f2; border-left: 4px solid #d9534f; padding: 15px; margin: 20px 0;">
+            <p style="margin: 0; font-weight: 600; color: #d9534f;">Raison du rejet :</p>
+            <p style="margin: 10px 0 0 0; color: #555;" th:text="${rejectionReason}">Les documents sont illisibles ou expirés.</p>
+        </div>
+        
+        <!-- Détails éventuels sur les documents concernés -->
+        <div th:if="${documents != null}" style="margin: 20px 0;">
+            <p style="font-weight: 600; color: #333;">Documents concernés :</p>
+            <ul style="color: #555;">
+                <li th:each="doc : ${documents}" th:text="${doc}">Pièce d'identité</li>
+            </ul>
+        </div>
+        
+        <!-- Instructions pour la correction -->
+        <p style="font-size: 16px; color: #555; font-family: 'Inter', Arial, Helvetica, sans-serif;">
+            Merci de corriger les informations ou de fournir des documents conformes, puis de les soumettre à nouveau via votre espace Camergo.
+        </p>
+        
+        <!-- Bouton d'action vers le tableau de bord -->
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="https://www.camergo.com/dashboard" style="background-color: #37B361; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: 600; display: inline-block;">Soumettre à nouveau</a>
+        </div>
+        
+        <!-- Support WhatsApp -->
+        <p style="font-size: 14px; color: #777; font-family: 'Inter', Arial, Helvetica, sans-serif; border-top: 1px solid #eee; padding-top: 20px;">
+            Besoin d'aide ? Contactez notre support sur 
+            <a href="https://wa.me/237691951267" style="color: #37B361; text-decoration: none;" target="_blank">WhatsApp</a>.
+        </p>
+        
+        <!-- Signature -->
+        <p style="font-size: 14px; color: #777; font-family: 'Inter', Arial, Helvetica, sans-serif;">– L'équipe Camergo</p>
+    </div>
+</body>
+</html>

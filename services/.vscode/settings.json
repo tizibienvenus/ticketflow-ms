@@ -1,0 +1,6 @@
+{
+    "java.compile.nullAnalysis.mode": "automatic",
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.import.gradle.annotationProcessing.enabled": true,
+    "java.import.maven.annotationProcessing.enabled": true
+}

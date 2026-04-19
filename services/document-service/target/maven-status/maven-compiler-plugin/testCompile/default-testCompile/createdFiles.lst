@@ -1,0 +1,4 @@
+com/camergo/document/DocumentServiceApplicationTests.class
+com/camergo/document/infrastructure/KycRequestAggregationAdapterTest.class
+com/camergo/document/application/DocumentApplicationServiceTest.class
+com/camergo/document/domain/DocumentDomainTest.class

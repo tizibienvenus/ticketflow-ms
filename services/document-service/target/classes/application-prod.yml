@@ -1,0 +1,24 @@
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+  data:
+    mongodb:
+      uri: ${MONGO_URI}   # injected via K8s secret / env var
+
+storage:
+  s3:
+    access-key: ${AWS_ACCESS_KEY_ID}
+    secret-key: ${AWS_SECRET_ACCESS_KEY}
+    region: ${AWS_REGION:eu-west-1}
+    bucket: ${S3_BUCKET:rideapp-documents-prod}
+
+logging:
+  level:
+    com.rideapp: INFO
+    root: WARN
+
+scheduler:
+  expiration:
+    cron: "0 0 * * * *"   # every hour in prod

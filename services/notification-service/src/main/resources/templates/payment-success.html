@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Paiement effectué - Camergo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body style="font-family: 'Inter', Arial, Helvetica, sans-serif; background-color: #f4f4f4; padding: 20px; margin: 0;">
+    <div style="max-width: 600px; margin: auto; background-color: #ffffff; border-radius: 8px; padding: 30px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        <h2 style="color: #37B361; font-family: 'Inter', Arial, Helvetica, sans-serif; font-weight: 600; margin-top: 0;">Camergo</h2>
+        <p style="font-size: 18px; color: #333; font-family: 'Inter', Arial, Helvetica, sans-serif; font-weight: 600;">Paiement confirmé</p>
+        <p style="font-size: 16px; color: #555; font-family: 'Inter', Arial, Helvetica, sans-serif;">
+            Bonjour <span th:text="${userName}" style="font-weight: 600;">Jean Dupont</span>,
+        </p>
+        <p style="font-size: 16px; color: #555; font-family: 'Inter', Arial, Helvetica, sans-serif;">
+            Votre paiement a été traité avec succès. Merci d'avoir utilisé Camergo.
+        </p>
+        <div style="background-color: #f9f9f9; border-left: 4px solid #37B361; padding: 15px; margin: 20px 0;">
+            <p style="margin: 0 0 10px 0; font-weight: 600; color: #333;">Détails du paiement :</p>
+            <table style="width: 100%; color: #555;">
+                <tr>
+                    <td style="padding: 5px 0;">Montant :</td>
+                    <td style="padding: 5px 0; font-weight: 600; color: #37B361;" th:text="${amount}">5 000 FCFA</td>
+                </tr>
+                <tr>
+                    <td style="padding: 5px 0;">Service :</td>
+                    <td style="padding: 5px 0;" th:text="${serviceType}">Course VTC</td>
+                </tr>
+                <tr>
+                    <td style="padding: 5px 0;">Mode de paiement :</td>
+                    <td style="padding: 5px 0;" th:text="${paymentMethod}">Wallet Camergo</td>
+                </tr>
+                <tr th:if="${transactionId}">
+                    <td style="padding: 5px 0;">Référence :</td>
+                    <td style="padding: 5px 0;" th:text="${transactionId}">TXN123456</td>
+                </tr>
+                <tr>
+                    <td style="padding: 5px 0;">Date :</td>
+                    <td style="padding: 5px 0;" th:text="${#dates.format(date, 'dd/MM/yyyy HH:mm')}">15/03/2026 14:30</td>
+                </tr>
+            </table>
+        </div>
+        <p style="font-size: 16px; color: #555; font-family: 'Inter', Arial, Helvetica, sans-serif;">
+            Un reçu détaillé est disponible dans votre espace client.
+        </p>
+        <div style="text-align: center; margin: 30px 0;">
+            <a th:href="${receiptLink}" style="background-color: #37B361; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: 600; display: inline-block;">Voir mon reçu</a>
+        </div>
+        <p style="font-size: 14px; color: #777; font-family: 'Inter', Arial, Helvetica, sans-serif; border-top: 1px solid #eee; padding-top: 20px;">
+            Une question sur cette transaction ? Contactez notre support sur 
+            <a href="https://wa.me/237691951267" style="color: #37B361; text-decoration: none;" target="_blank">WhatsApp</a>.
+        </p>
+        <p style="font-size: 14px; color: #777; font-family: 'Inter', Arial, Helvetica, sans-serif;">– L'équipe Camergo</p>
+    </div>
+</body>
+</html>

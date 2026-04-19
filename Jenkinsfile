@@ -1,0 +1,134 @@
+pipeline {
+    agent any
+
+    // Ajouter cette section
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '10'))
+        timeout(time: 1, unit: 'HOURS')
+    }
+
+    // Ajouter le déclenchement automatique
+    triggers {
+        githubPush()
+    }
+
+    tools {
+        jdk 'jdk-21'
+        maven 'maven-3'
+    }
+
+    environment {
+        M2_HOME = "${env.HOME}/.m2/repository"
+    }
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                git branch: env.BRANCH_NAME ?: 'main',
+                    url: 'https://github.com/Smart-Innovation-Plus/camergo-microservices'
+            }
+        }
+
+        stage('Prepare Parent') {
+            when {
+                anyOf {
+                    branch 'main'
+                    branch 'dev-tiz'
+                }
+            }
+            steps {
+                dir('services') {
+                    sh 'mvn install -N'
+                }
+            }
+        }
+
+        stage('Build Common') {
+            when {
+                anyOf {
+                    branch 'main'
+                    branch 'dev-tiz'
+                }
+            }
+            steps {
+                dir('services/common') {
+                    sh 'mvn clean install'
+                }
+                stash name: 'common-jar', includes: '**/.m2/repository/com/camergo/common/**'
+            }
+        }
+
+        stage('Build Services') {
+            when {
+                anyOf {
+                    branch 'main'
+                    branch 'dev-tiz'
+                }
+            }
+            parallel {
+                stage('config-server') {
+                    steps { buildService('config-server') }
+                }
+                stage('discovery-service') {
+                    steps { buildService('discovery-service') }
+                }
+                stage('api-gateway') {
+                    steps { buildService('api-gateway') }
+                }
+                stage('documentations-aggregator') {
+                    steps { buildService('documentations-aggregator') }
+                }
+                stage('identity-service') {
+                    steps { buildService('identity-service') }
+                }
+                stage('demo') {
+                    steps { buildService('demo') }
+                }
+            }
+        }
+
+        stage('Test Services') {
+            when {
+                anyOf {
+                    branch 'main'
+                    branch 'dev-tiz'
+                }
+            }
+            parallel {
+                stage('Test config-server') {
+                    steps { testService('config-server') }
+                }
+                stage('Test discovery-service') {
+                    steps { testService('discovery-service') }
+                }
+                stage('Test api-gateway') {
+                    steps { testService('api-gateway') }
+                }
+                stage('Test documentations-aggregator') {
+                    steps { testService('documentations-aggregator') }
+                }
+                stage('Test identity-service') {
+                    steps { testService('identity-service') }
+                }
+                stage('Test demo') {
+                    steps { testService('demo') }
+                }
+            }
+        }
+    }
+}
+
+def buildService(serviceName) {
+    unstash 'common-jar'
+    dir("services/${serviceName}") {
+        sh 'mvn clean install -e || true'
+    }
+}
+
+def testService(serviceName) {
+    unstash 'common-jar'
+    dir("services/${serviceName}") {
+        sh 'mvn test'
+    }
+}

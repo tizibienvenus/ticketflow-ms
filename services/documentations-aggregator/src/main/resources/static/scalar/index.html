@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <title>API Docs CamerGo</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+    <style>
+      body {
+        margin: 0;
+        font-family: sans-serif;
+      }
+    </style>
+
+    <div id="app"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@scalar/api-reference"></script>
+
+    <script>
+      fetch('/documentation/scalar/sources')
+        .then(res => res.json())
+        .then(sources => {
+          Scalar.createApiReference('#app', {
+            sources: sources,
+            theme: 'deepSpace',
+            layout: 'classic',
+            darkMode: true,
+            expandAllResponses: true,
+            hideClientButton: true,
+            showSidebar: true,
+            operationTitleSource: 'summary',
+            persistAuth: false,
+            hideModels: false,
+            documentDownloadType: 'both',
+            hideTestRequestButton: false,
+            hideSearch: false,
+            showOperationId: false,
+            hideDarkModeToggle: false,
+            defaultOpenFirstTag: true,
+            orderSchemaPropertiesBy: 'alpha',
+            orderRequiredPropertiesFirst: true
+          })
+        }
+      )
+    </script>
+
+</body>
+</html>

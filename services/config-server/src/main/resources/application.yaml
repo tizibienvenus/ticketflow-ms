@@ -1,0 +1,53 @@
+server:
+  port: 8888
+spring:
+  profiles:
+    active: native
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        #git:
+        #  uri: ${CONFIG_REPO_URI:https://github.com/devtizi/camergo-config.git}
+        #  username: ${CONFIG_REPO_USER:devtizi}
+        #  password: ${CONFIG_REPO_PASSWORD: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}
+        #  default-label: main
+        #  timeout: 30
+        #  force-pull: true
+        #  clone-on-start: true
+        #  search-paths:
+        #    - '{application}'  # Recherche dans dossier du microservice
+        #    - '{application}/config/*'  # Recherche dans config/
+        #    - '{application}/profiles/*/*'  # Recherche dans profiles/
+        #bootstrap: true
+        #health:
+        #  enabled: true
+        #overrides:
+        #  spring.cloud.config.enabled: true
+        native:
+          search-locations: file:/configurations/,classpath:/configurations/
+
+
+# Monitoring
+management:
+  tracing:
+    sampling:
+      probability: 0.1   # 10% des requêtes
+
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+
+  endpoint:
+    health:
+      show-details: when_authorized
+
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
+logging:
+  pattern:
+    level: "%5p [${spring.application.name}]"

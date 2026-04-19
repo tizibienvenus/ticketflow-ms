@@ -1,0 +1,56 @@
+server:
+  port: 8040
+
+spring:
+  data:
+    mongodb:
+      auto-index-creation: true
+      uri: ${SPRING_DATA_MONGODB_URI:mongodb://localhost:27017/notificationdb}
+  jackson:
+    time-zone: ${SPRING_JACKSON_TIME-ZONE:Africa/Johannesburg}
+    serialization:
+      write-dates-as-timestamps: false
+  mail:
+    host: ${SPRING_MAIL_HOST:smtp.gmail.com}
+    port: ${SPRING_MAIL_PORT:587}
+    username: ${SPRING_MAIL_USERNAME:camergo.camergo@gmail.com}
+    password: nssq dyqb peiw xeep #${SPRING_MAIL_PASSWORD:nssq dyqb peiw xeep}
+    protocol: smtp
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML
+    encoding: UTF-8
+    content-type: text/html
+
+camergo:
+  security:
+    enabled: true
+    disable-auto-security: false
+    issuer: ${KEYCLOAK_ISSUER_URI:https://keycloak.4dealx.com/realms/master}
+    jwkSetUri: ${KEYCLOAK_JWK_SET_URI:https://keycloak.4dealx.com/realms/master/protocol/openid-connect/certs}
+
+swagger:
+  enabled: true
+springdoc:
+  api-docs:
+    enabled: true
+    path: /api/v3/api-docs
+  swagger-ui:
+    enabled: false
+    path: /swagger-ui.html
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always

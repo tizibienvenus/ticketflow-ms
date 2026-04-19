@@ -1,0 +1,24 @@
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+  data:
+    mongodb:
+      uri: ${SPRING_DATA_MONGODB_URI:${MONGO_URI:mongodb://localhost:27017/document_service_dev}}
+
+storage:
+  minio:
+    endpoint: http://localhost:9000
+    access-key: minioadmin
+    secret-key: minioadmin
+    bucket: documents-dev
+
+logging:
+  level:
+    com.rideapp: DEBUG
+    org.springframework.data.mongodb: DEBUG
+
+scheduler:
+  expiration:
+    cron: "0 */5 * * * *"   # every 5 min in dev for easy testing

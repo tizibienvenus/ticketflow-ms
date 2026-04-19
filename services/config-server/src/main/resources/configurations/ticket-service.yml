@@ -1,0 +1,114 @@
+server:
+  port: 8033
+
+spring:
+  application:
+    name: ticket-service
+  #config:import: optional:file:security.yml, optional:file:kafka.yml, optional:file:swagger.yml
+  datasource:
+    url: jdbc:postgresql://localhost:5432/camergo
+    username: admin
+    password: 1234
+    driver-class-name: org.postgresql.Driver
+
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      idle-timeout: 30000
+      connection-timeout: 20000
+  
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
+      timeout: 2000ms
+      lettuce:
+        pool:
+          max-active: 8
+          max-idle: 8
+          min-idle: 0
+
+  jpa:
+    open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        transaction: jta.platform.org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform
+    #database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update #create-drop
+    show-sql: true
+
+  flyway:
+    enabled: false
+    locations: classpath:db/migration
+    url: ${spring.datasource.url}
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+    baseline-on-migrate: true
+    baseline-version: 0
+    validate-on-migrate: false
+  
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${KEYCLOAK_ISSUER_URI:https://keycloak.4dealx.com/realms/camergo}
+          jwk-set-uri: ${KEYCLOAK_JWK_SET_URI:https://keycloak.4dealx.com/realms/camergo/protocol/openid-connect/certs}
+
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+
+    consumer:
+      group-id: ${spring.application.name:ticket-service}
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
+        spring.json.use.type.headers: false
+
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      acks: all
+      retries: 3
+      enable-idempotence: true
+      properties:
+        spring.json.add.type.headers: false
+    listener:
+      ack-mode: record
+
+keycloak:
+  auth-server-url: ${KEYCLOAK_AUTH_SERVER_URL:https://keycloak.4dealx.com}
+  realm: ${KEYCLOAK_REALM:camergo}
+  admin:
+    username: ${KEYCLOAK_ADMIN_USERNAME:camergo}
+    password: ${KEYCLOAK_ADMIN_PASSWORD:NMtEJfvffe7wjdn}
+  client-id: camergo-identity-service
+  client-secret: ${KEYCLOAK_CLIENT_SECRET:LiDz3TeP5Xb2vJdwYuCQfnG7Rdubs0Dy}
+  token-uri: ${keycloak.auth-server-url}/realms/${keycloak.realm}/protocol/openid-connect/token
+
+ticketflow:
+  security:
+    enabled: true
+    disable-auto-security: false
+    issuer: ${KEYCLOAK_ISSUER_URI:https://keycloak.4dealx.com/realms/master}
+    jwkSetUri: ${KEYCLOAK_JWK_SET_URI:https://keycloak.4dealx.com/realms/master/protocol/openid-connect/certs}
+
+
+kafka:
+  topics:
+    ticket-created: ticket.created
+    ticket-status-changed: ticket.status.changed
+    document-uploaded: document.uploaded
+ 
+logging:
+  level:
+    com.boaz.ticketflow: DEBUG
+    org.springframework.security: INFO
+    feign: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%X{traceId:-},%X{spanId:-}] [%thread] %-5level %logger{36} - %msg%n"
+ 

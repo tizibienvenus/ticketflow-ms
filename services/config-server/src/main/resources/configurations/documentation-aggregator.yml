@@ -1,0 +1,64 @@
+server:
+  port: 8084
+
+# Mode statique (si vous ne voulez pas de service de découverte)
+#aggregator:
+  #services:
+    #- name: demo-service
+    #  url: http://localhost:8050/v3/api-docs   # URL complète du endpoint OpenAPI
+  # Stratégie de fusion : prefix (ajoute un préfixe au path) ou tag (ajoute un tag)
+  #path-prefix-strategy: true   # si true, chaque path sera préfixé par /{serviceName}
+
+# Mode dynamique (Eureka) – commenter le bloc statique ci-dessus si utilisé
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://discovery-service:8761/eureka/
+    enabled: true
+  instance:
+    hostname: documentations-aggregator
+
+aggregator:
+  # En mode dynamique, on spécifie le chemin OpenAPI à interroger
+  dynamic:
+    api-docs-path: /api/v3/api-docs
+  path-prefix-strategy: true
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always
+
+documentation:
+  excluded-services:
+    - config-server
+    - api-gateway
+    - discovery-service
+
+docs:
+  enabled: true
+springdoc:
+  api-docs:
+    enabled: true
+    path: /api/v3/api-docs
+  swagger-ui:
+    enabled: true
+    configUrl: /documentation/swagger-config
+    path: documentation/swagger-ui.html
+
+
+logging:
+  level:
+    com.camergo: INFO
+    org.springframework:
+      web.servlet.resource: DEBUG
+      kafka: WARN
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level [%X{traceId}] %logger{36} - %msg%n"

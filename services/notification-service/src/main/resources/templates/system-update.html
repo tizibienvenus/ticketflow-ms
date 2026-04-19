@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Mise à jour Camergo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body style="font-family: 'Inter', Arial, Helvetica, sans-serif; background-color: #f4f4f4; padding: 20px; margin: 0;">
+    <div style="max-width: 600px; margin: auto; background-color: #ffffff; border-radius: 8px; padding: 30px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        <h2 style="color: #37B361; font-family: 'Inter', Arial, Helvetica, sans-serif; font-weight: 600; margin-top: 0;">Camergo</h2>
+        <p style="font-size: 18px; color: #333; font-family: 'Inter', Arial, Helvetica, sans-serif; font-weight: 600;">Mise à jour de l'application</p>
+        <p style="font-size: 16px; color: #555; font-family: 'Inter', Arial, Helvetica, sans-serif;">
+            Bonjour,
+        </p>
+        <p style="font-size: 16px; color: #555; font-family: 'Inter', Arial, Helvetica, sans-serif;">
+            Nous vous informons d'une prochaine maintenance programmée ou d'une mise à jour disponible.
+        </p>
+        <div style="background-color: #f9f9f9; border-left: 4px solid #37B361; padding: 15px; margin: 20px 0;">
+            <p style="margin: 0 0 5px 0; font-weight: 600;" th:text="${title}">Nouvelle version 2.5.0</p>
+            <p style="margin: 0;" th:text="${message}">L'application sera temporairement indisponible le 20/03/2026 de 2h à 4h pour maintenance. Merci de votre compréhension.</p>
+        </div>
+        <p style="font-size: 14px; color: #777; font-family: 'Inter', Arial, Helvetica, sans-serif;">
+            Pour plus d'informations, consultez notre centre d'aide.
+        </p>
+        <p style="font-size: 14px; color: #777; font-family: 'Inter', Arial, Helvetica, sans-serif; border-top: 1px solid #eee; padding-top: 20px;">
+            Une question ? Contactez notre support sur 
+            <a href="https://wa.me/237691951267" style="color: #37B361; text-decoration: none;" target="_blank">WhatsApp</a>.
+        </p>
+        <p style="font-size: 14px; color: #777; font-family: 'Inter', Arial, Helvetica, sans-serif;">– L'équipe Camergo</p>
+    </div>
+</body>
+</html>

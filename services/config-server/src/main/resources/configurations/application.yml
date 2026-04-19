@@ -1,0 +1,49 @@
+
+# Configuration commune à tous les microservices
+eureka:
+  instance:
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 30
+    lease-expiration-duration-in-seconds: 90
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+    fetch-registry: true
+    register-with-eureka: true
+    healthcheck:
+      enabled: true
+
+ticketflow:
+  security:
+    enabled: true
+    disable-auto-security: false
+    issuer-uri: http://localhost:8180/realms/ticketflow
+    jwk-set-uri: http://localhost:8180/realms/ticketflow/protocol/openid-connect/certs
+  
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+    metrics:
+      enabled: true
+  zipkin:
+    tracing:
+      endpoint: http://zipkin:9411/api/v2/spans
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    org.springframework.security: DEBUG
+ 

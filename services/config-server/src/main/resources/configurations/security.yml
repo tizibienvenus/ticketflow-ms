@@ -1,0 +1,16 @@
+keycloak:
+  auth-server-url: ${KEYCLOAK_AUTH_SERVER_URL:https://keycloak.4dealx.com}
+  realm: ${KEYCLOAK_REALM:camergo}
+  admin:
+    username: ${KEYCLOAK_ADMIN_USERNAME:camergo}
+    password: ${KEYCLOAK_ADMIN_PASSWORD:NMtEJfvffe7wjdn}
+  client-id: camergo-identity-service
+  client-secret: ${KEYCLOAK_CLIENT_SECRET:LiDz3TeP5Xb2vJdwYuCQfnG7Rdubs0Dy}
+  token-uri: ${keycloak.auth-server-url}/realms/${keycloak.realm}/protocol/openid-connect/token
+
+ticketflow:
+  security:
+    enabled: true
+    disable-auto-security: false
+    issuer: ${KEYCLOAK_ISSUER_URI:https://keycloak.4dealx.com/realms/master}
+    jwkSetUri: ${KEYCLOAK_JWK_SET_URI:https://keycloak.4dealx.com/realms/master/protocol/openid-connect/certs}

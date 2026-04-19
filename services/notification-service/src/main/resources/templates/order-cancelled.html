@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Mise à jour sur votre commande - Camergo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body style="font-family: 'Inter', Arial, Helvetica, sans-serif; background-color: #f4f4f4; padding: 20px; margin: 0;">
+    <div style="max-width: 600px; margin: auto; background-color: #ffffff; border-radius: 8px; padding: 30px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        <h2 style="color: #37B361; font-family: 'Inter', Arial, Helvetica, sans-serif; font-weight: 600; margin-top: 0;">Camergo</h2>
+        <p style="font-size: 18px; color: #d9534f; font-family: 'Inter', Arial, Helvetica, sans-serif; font-weight: 600;">Mise à jour sur votre commande</p>
+        <p style="font-size: 16px; color: #555; font-family: 'Inter', Arial, Helvetica, sans-serif;">
+            Bonjour <span th:text="${userName}" style="font-weight: 600;">Jean Dupont</span>,
+        </p>
+        <p style="font-size: 16px; color: #555; font-family: 'Inter', Arial, Helvetica, sans-serif;">
+            Nous regrettons de vous informer que votre commande <span th:text="${orderId}">#12345</span> a été annulée.
+        </p>
+        <div style="background-color: #fcf2f2; border-left: 4px solid #d9534f; padding: 15px; margin: 20px 0;">
+            <p style="margin: 0 0 5px 0; font-weight: 600; color: #d9534f;">Raison de l'annulation :</p>
+            <p style="margin: 0;" th:text="${cancellationReason}">Problème de stock / indisponibilité du produit</p>
+        </div>
+        <div th:if="${refundAmount}" style="background-color: #f9f9f9; border-left: 4px solid #37B361; padding: 15px; margin: 20px 0;">
+            <p style="margin: 0;">Remboursement effectué : <span th:text="${refundAmount}" style="font-weight: 600;">12 500 FCFA</span></p>
+            <p style="margin: 5px 0 0 0;">Le remboursement sera crédité sur votre <span th:text="${refundMethod}">Wallet Camergo</span> sous 48h.</p>
+        </div>
+        <p style="font-size: 16px; color: #555; font-family: 'Inter', Arial, Helvetica, sans-serif;">
+            Nous nous excusons pour la gêne occasionnée et vous remercions de votre compréhension.
+        </p>
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="https://www.camergo.com/orders" style="background-color: #37B361; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: 600; display: inline-block;">Voir mes commandes</a>
+        </div>
+        <p style="font-size: 14px; color: #777; font-family: 'Inter', Arial, Helvetica, sans-serif; border-top: 1px solid #eee; padding-top: 20px;">
+            Besoin d'aide ? Contactez notre support sur 
+            <a href="https://wa.me/237691951267" style="color: #37B361; text-decoration: none;" target="_blank">WhatsApp</a>.
+        </p>
+        <p style="font-size: 14px; color: #777; font-family: 'Inter', Arial, Helvetica, sans-serif;">– L'équipe Camergo</p>
+    </div>
+</body>
+</html>

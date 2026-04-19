@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <title>Camergo API Docs</title>
+
+  <!-- Swagger CSS -->
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swagger-ui-dist@5/swagger-ui.css" />
+  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/npm/swagger-ui-dist@5/favicon-32x32.png">
+
+  <!-- Swagger CSS Local -->
+  <!--
+    <link rel="stylesheet" href="/webjars/swagger-ui/5.17.14/swagger-ui.css" />
+    <link rel="icon" type="image/png" href="/webjars/swagger-ui/5.17.14/favicon-32x32.png">
+  -->
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+
+    #swagger-ui {
+      height: 100vh;
+    }
+
+  
+
+  </style>
+</head>
+
+<body>
+  <div id="swagger-ui"></div>
+
+  <!-- Swagger JS Remote -->
+  <script src="https://cdn.jsdelivr.net/npm/swagger-ui-dist@5/swagger-ui-bundle.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swagger-ui-dist@5/swagger-ui-standalone-preset.js"></script>
+
+
+  <!-- Swagger JS Local -->
+  <!-- 
+    <script src="/webjars/swagger-ui/5.17.14/swagger-ui-bundle.js"></script>
+    <script src="/webjars/swagger-ui/5.17.14/swagger-ui-standalone-preset.js"></script> 
+  -->
+
+  <script>
+    window.onload = async () => {
+
+      window.ui = SwaggerUIBundle({
+        url: "/api/v3/api-docs", // 🔥 endpoint Springdoc
+        dom_id: "#swagger-ui",
+
+        deepLinking: true,
+        displayOperationId: false,
+
+        presets: [
+          SwaggerUIBundle.presets.apis,
+          SwaggerUIStandalonePreset
+        ],
+
+        layout: "StandaloneLayout",
+        faviconUrl: "/webjars/swagger-ui/favicon-32x32.png",
+  
+
+      });
+    };
+  </script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Votre code OTP Camergo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Media query pour les petits écrans (optionnel) */
+        @media only screen and (max-width: 600px) {
+            table[class="container"] {
+                width: 100% !important;
+            }
+            td[class="container-padding"] {
+                padding: 15px !important;
+            }
+        }
+    </style>
+</head>
+<body style="margin:0; padding:0; background-color:#f4f4f4; width:100% !important; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%;">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse; mso-table-lspace:0; mso-table-rspace:0; background-color:#f4f4f4;">
+        <tr>
+            <td align="center" style="padding:20px 0;">
+                <!-- Conteneur principal : largeur max 600px, fond blanc, coins arrondis -->
+                <table width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:600px; width:100%; background-color:#ffffff; border-radius:8px; border-collapse:separate; overflow:hidden;" class="container">
+                    <tr>
+                        <td style="padding:30px;" class="container-padding">
+                            <!-- En-tête -->
+                            <h2 style="color:#37B361; font-family:'Inter', Arial, Helvetica, sans-serif; font-weight:600; margin:0 0 15px 0;">Camergo</h2>
+                            
+                            <!-- Titre -->
+                            <p style="font-size:16px; color:#555; font-family:'Inter', Arial, Helvetica, sans-serif; margin:0 0 10px 0;">Verify your login</p>
+                            
+                            <!-- Sous-titre -->
+                            <p style="font-size:14px; color:#777; font-family:'Inter', Arial, Helvetica, sans-serif; margin:0 0 15px 0;">Below is your one time passcode:</p>
+                            
+                            <!-- Boîte OTP -->
+                            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                <tr>
+                                    <td style="background-color:#f0f0f0; border-radius:6px; padding:15px; text-align:center; font-size:24px; letter-spacing:10px; font-weight:700; color:#2c3e50; font-family:'Inter', Arial, Helvetica, sans-serif;">
+                                        <span th:text="${otpCode}">123567</span>
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                            <!-- Support -->
+                            <p style="font-size:14px; color:#777; font-family:'Inter', Arial, Helvetica, sans-serif; margin:20px 0 0 0;">
+                                We're here to help if you need it. Visit the 
+                                <a href="https://wa.me/237691951267" style="color:#37B361; text-decoration:none;" target="_blank">Camergo Support</a> 
+                                for more info or contact us.
+                            </p>
+                            
+                            <!-- Signature -->
+                            <p style="font-size:14px; color:#777; font-family:'Inter', Arial, Helvetica, sans-serif; margin:10px 0 0 0;">– Camergo</p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

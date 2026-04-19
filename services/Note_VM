@@ -1,0 +1,38 @@
+VM Linux Ubuntu 22.04
+
+Backend 
+    - Kubernetes
+    - Docker
+    - Prometheus
+    - Grafana
+
+Frontend
+    - Docker
+
+
+
+
+
+
+
+    - Spring Boot
+    - Spring Cloud
+    - Spring Security
+    - Spring Data JPA
+    - Spring Actuator
+    - Spring Cloud Netflix Eureka
+    - Spring Cloud Config
+    - Spring Cloud Gateway
+    - Spring Cloud OpenFeign
+    - Spring Cloud Sleuth
+    - Spring Cloud Zipkin
+    - Springdoc OpenAPI
+    - JUnit 5
+    - Mockito
+    - H2 Database
+    - MySQL Database
+    - Lombok
+    - Maven
+    - Git
+    - Jenkins
+    - SonarQube

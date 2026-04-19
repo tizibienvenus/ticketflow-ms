@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmation d'inscription - Camergo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body style="font-family: 'Inter', Arial, Helvetica, sans-serif; background-color: #f4f4f4; padding: 20px; margin: 0;">
+    <div style="max-width: 600px; margin: auto; background-color: #ffffff; border-radius: 8px; padding: 30px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        <!-- En-tête -->
+        <h2 style="color: #37B361; font-family: 'Inter', Arial, Helvetica, sans-serif; font-weight: 600; margin-top: 0;">Camergo</h2>
+        
+        <!-- Titre principal -->
+        <p style="font-size: 18px; color: #333; font-family: 'Inter', Arial, Helvetica, sans-serif; font-weight: 600;">Bienvenue sur Camergo !</p>
+        
+        <!-- Message personnalisé -->
+        <p style="font-size: 16px; color: #555; font-family: 'Inter', Arial, Helvetica, sans-serif;">
+            Bonjour <span th:text="${userName}" style="font-weight: 600;">Jean Dupont</span>,
+        </p>
+        <p style="font-size: 16px; color: #555; font-family: 'Inter', Arial, Helvetica, sans-serif;">
+            Nous sommes ravis de vous compter parmi nos utilisateurs. Votre inscription a été confirmée avec succès.
+        </p>
+        
+        <!-- Rappel des services -->
+        <p style="font-size: 16px; color: #555; font-family: 'Inter', Arial, Helvetica, sans-serif;">
+            Découvrez dès maintenant tous nos services : VTC, livraison de repas, courses, covoiturage, épicerie et bien plus encore.
+        </p>
+        
+        <!-- Sinon, bouton vers l'application -->
+        <!-- <div th:unless="${verificationLink}" style="text-align: center; margin: 30px 0;">
+            <a href="https://www.camergo.com/dashboard" style="background-color: #37B361; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: 600; display: inline-block;">Commencer</a>
+        </div> -->
+        
+        <!-- Support WhatsApp -->
+        <p style="font-size: 14px; color: #777; font-family: 'Inter', Arial, Helvetica, sans-serif; border-top: 1px solid #eee; padding-top: 20px;">
+            Besoin d'aide ? Contactez notre support sur 
+            <a href="https://wa.me/237691951267" style="color: #37B361; text-decoration: none;" target="_blank">WhatsApp</a>.
+        </p>
+        
+        <!-- Signature -->
+        <p style="font-size: 14px; color: #777; font-family: 'Inter', Arial, Helvetica, sans-serif;">– L'équipe Camergo</p>
+    </div>
+</body>
+</html>

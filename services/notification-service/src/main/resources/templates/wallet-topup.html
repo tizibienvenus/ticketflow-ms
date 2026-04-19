@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Recharge de votre portefeuille - Camergo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Fallback pour les clients qui ne supportent pas les liens externes */
+        body, table, td, p, a { font-family: 'Inter', Arial, Helvetica, sans-serif; }
+        @media only screen and (max-width: 600px) {
+            table[class="container"] {
+                width: 100% !important;
+            }
+            td[class="container-padding"] {
+                padding: 15px !important;
+            }
+        }
+    </style>
+</head>
+<body style="margin:0; padding:0; background-color:#f4f4f4; width:100% !important; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%;">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse; mso-table-lspace:0; mso-table-rspace:0; background-color:#f4f4f4;">
+        <tr>
+            <td align="center" style="padding:20px 0;">
+                <!-- Conteneur principal : largeur max 600px, fond blanc, coins arrondis -->
+                <table width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:600px; width:100%; background-color:#ffffff; border-radius:8px; border-collapse:separate; overflow:hidden;" class="container">
+                    <tr>
+                        <td style="padding:30px;" class="container-padding">
+                            <!-- En-tête -->
+                            <h2 style="color: #37B361; font-family: 'Inter', Arial, Helvetica, sans-serif; font-weight: 600; margin-top:0; margin-bottom:20px;">Camergo</h2>
+                            
+                            <!-- Titre -->
+                            <p style="font-size:18px; color:#333; font-family: 'Inter', Arial, Helvetica, sans-serif; font-weight:600; margin:0 0 15px 0;">Votre compte a été crédité</p>
+                            
+                            <!-- Message personnalisé -->
+                            <p style="font-size:16px; color:#555; font-family: 'Inter', Arial, Helvetica, sans-serif; margin:0 0 10px 0;">
+                                Bonjour <span th:text="${userName}" style="font-weight:600;">Jean Dupont</span>,
+                            </p>
+                            <p style="font-size:16px; color:#555; font-family: 'Inter', Arial, Helvetica, sans-serif; margin:0 0 20px 0;">
+                                Votre portefeuille Camergo a été rechargé avec succès.
+                            </p>
+                            
+                            <!-- Encart des détails -->
+                            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f9f9f9; border-left:4px solid #37B361; margin:20px 0;">
+                                <tr>
+                                    <td style="padding:15px;">
+                                        <p style="margin:0 0 10px 0; font-weight:600; color:#333;">Détails de l'opération :</p>
+                                        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="color:#555;">
+                                            <tr>
+                                                <td style="padding:5px 0;">Montant crédité :</td>
+                                                <td style="padding:5px 0; font-weight:600; color:#37B361;" th:text="${amount}">10 000 FCFA</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding:5px 0;">Mode de paiement :</td>
+                                                <td style="padding:5px 0;" th:text="${paymentMethod}">Carte bancaire</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding:5px 0;">Nouveau solde :</td>
+                                                <td style="padding:5px 0; font-weight:600;" th:text="${newBalance}">25 000 FCFA</td>
+                                            </tr>
+                                            <tr th:if="${transactionId}">
+                                                <td style="padding:5px 0;">Référence :</td>
+                                                <td style="padding:5px 0;" th:text="${transactionId}">TXN123456</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding:5px 0;">Date :</td>
+                                                <td style="padding:5px 0;" th:text="${#dates.format(date, 'dd/MM/yyyy HH:mm')}">15/03/2026 14:30</td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                            <!-- Texte d'information -->
+                            <p style="font-size:16px; color:#555; font-family: 'Inter', Arial, Helvetica, sans-serif; margin:0 0 30px 0;">
+                                Vous pouvez maintenant utiliser ce montant pour vos courses, trajets VTC, livraisons et autres services Camergo.
+                            </p>
+                            
+                            <!-- Bouton -->
+                            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                <tr>
+                                    <td align="center" style="padding:0 0 30px 0;">
+                                        <a href="https://www.camergo.com/wallet" style="background-color:#37B361; color:#ffffff; padding:12px 24px; text-decoration:none; border-radius:6px; font-weight:600; display:inline-block;">Voir mon portefeuille</a>
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                            <!-- Support et signature -->
+                            <p style="font-size:14px; color:#777; font-family: 'Inter', Arial, Helvetica, sans-serif; border-top:1px solid #eee; padding-top:20px; margin:0;">
+                                Une question ? Contactez notre support sur 
+                                <a href="https://wa.me/237691951267" style="color:#37B361; text-decoration:none;" target="_blank">WhatsApp</a>.
+                            </p>
+                            <p style="font-size:14px; color:#777; font-family: 'Inter', Arial, Helvetica, sans-serif; margin:10px 0 0 0;">– L'équipe Camergo</p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

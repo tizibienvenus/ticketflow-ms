@@ -1,0 +1,10 @@
+swagger:
+  enabled: true
+springdoc:
+  api-docs:
+    enabled: true
+    path: /api/v3/api-docs
+    operationsSorter: method
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html

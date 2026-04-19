@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Votre ami a rejoint Camergo !</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body style="font-family: 'Inter', Arial, Helvetica, sans-serif; background-color: #f4f4f4; padding: 20px; margin: 0;">
+    <div style="max-width: 600px; margin: auto; background-color: #ffffff; border-radius: 8px; padding: 30px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        <h2 style="color: #37B361; font-family: 'Inter', Arial, Helvetica, sans-serif; font-weight: 600; margin-top: 0;">Camergo</h2>
+        <p style="font-size: 18px; color: #333; font-family: 'Inter', Arial, Helvetica, sans-serif; font-weight: 600;">Votre parrainage a réussi !</p>
+        <p style="font-size: 16px; color: #555; font-family: 'Inter', Arial, Helvetica, sans-serif;">
+            Bonjour <span th:text="${sponsorName}" style="font-weight: 600;">Jean Dupont</span>,
+        </p>
+        <p style="font-size: 16px; color: #555; font-family: 'Inter', Arial, Helvetica, sans-serif;">
+            Votre ami <span th:text="${friendName}" style="font-weight: 600;">Marie</span> vient de rejoindre Camergo grâce à votre recommandation.
+        </p>
+        <div style="background-color: #f9f9f9; border-left: 4px solid #37B361; padding: 15px; margin: 20px 0;">
+            <p style="margin: 0 0 5px 0; font-weight: 600;">Votre bonus de parrainage :</p>
+            <p style="margin: 0; font-size: 24px; font-weight: 700; color: #37B361;" th:text="${bonusAmount}">1 000 FCFA</p>
+            <p style="margin: 10px 0 0 0;" th:text="${bonusDescription}">Crédité sur votre wallet Camergo</p>
+        </div>
+        <p style="font-size: 16px; color: #555; font-family: 'Inter', Arial, Helvetica, sans-serif;">
+            Continuez à partager Camergo autour de vous et gagnez encore plus de récompenses !
+        </p>
+        <div style="text-align: center; margin: 30px 0;">
+            <a th:href="${referralLink}" style="background-color: #37B361; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: 600; display: inline-block;">Inviter d'autres amis</a>
+        </div>
+        <p style="font-size: 14px; color: #777; font-family: 'Inter', Arial, Helvetica, sans-serif; border-top: 1px solid #eee; padding-top: 20px;">
+            Une question sur le parrainage ? Contactez notre support sur 
+            <a href="https://wa.me/237691951267" style="color: #37B361; text-decoration: none;" target="_blank">WhatsApp</a>.
+        </p>
+        <p style="font-size: 14px; color: #777; font-family: 'Inter', Arial, Helvetica, sans-serif;">– L'équipe Camergo</p>
+    </div>
+</body>
+</html>

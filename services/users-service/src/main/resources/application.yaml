@@ -1,0 +1,13 @@
+spring:
+  config:
+    import: optional:configserver:http://localhost:8888
+  application:
+    name: identity-service
+  cloud:
+    vault:
+      enabled: ${SPRING_CLOUD_VAULT_ENABLED:false}
+
+management:
+  health:
+    vault:
+      enabled: ${MANAGEMENT_HEALTH_VAULT_ENABLED:false}
