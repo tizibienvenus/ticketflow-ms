@@ -11,7 +11,7 @@ spring:
         #git:
         #  uri: ${CONFIG_REPO_URI:https://github.com/devtizi/camergo-config.git}
         #  username: ${CONFIG_REPO_USER:devtizi}
-        #  password: ${CONFIG_REPO_PASSWORD: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}
+        #  password: ${CONFIG_REPO_PASSWORD:}
         #  default-label: main
         #  timeout: 30
         #  force-pull: true
